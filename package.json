@@ -1,0 +1,18 @@
+{
+  "name": "jjapra_inquirer",
+  "version": "1.0.0",
+  "main": "JJapRa_inquirer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "axios": "^1.7.2",
+    "axios-cookiejar-support": "^5.0.2",
+    "inquirer": "^9.2.22",
+    "tough-cookie": "^4.1.4"
+  }
+}
