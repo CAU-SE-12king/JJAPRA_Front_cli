@@ -1,0 +1,19 @@
+{
+    "type": "module",
+    "name": "jjapra_inquirer",
+    "version": "1.0.0",
+    "main": "JJapRa_inquirer.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "description": "",
+    "dependencies": {
+        "axios": "^1.7.2",
+        "inquirer": "^9.2.22",
+        "jwt-decode": "^4.0.0",
+        "node-localstorage": "^3.0.5"
+    }
+}
