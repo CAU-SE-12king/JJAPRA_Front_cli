@@ -1,1 +1,0 @@
-# JJAPRA_Front_cli
