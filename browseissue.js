@@ -120,11 +120,11 @@ export async function browseissue() {
 
     const issues = await fetchIssues(projectId, token);
     let filteredIssues;
-    if(field === 'writer'){
-        filteredIssues = issues.filter(issueData => issueData.issue[field] === value);
+    if(field === 'assignee'){
+        filteredIssues = issues.filter(issueData => issueData[field] === value);
     }
     else{
-        filteredIssues = issues.filter(issueData => issueData[field] === value);
+        filteredIssues = issues.filter(issueData => issueData.issue[field] === value);
     }
 
     if (filteredIssues.length > 0) {

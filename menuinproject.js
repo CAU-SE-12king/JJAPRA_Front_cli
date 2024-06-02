@@ -47,7 +47,6 @@ export async function menuinproject() {
     }
 
     const userRole = localStorage.getItem('role');
-    console.log('Stored role:', userRole);
 
     let choices;
     if (userRole === 'ADMIN') {
