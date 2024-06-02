@@ -52,9 +52,9 @@ export async function menuinproject() {
             name: 'issueTrackingMenu',
             message: 'What do you want to do?',
             choices: isAdmin 
-                ? ['이슈 등록', '이슈 목록, 입장', '이슈 브라우즈', '이슈 통계 확인', '프로젝트 정보 확인', '프로젝트에 사용자 등록', '프로젝트 메뉴로',
+                ? ['이슈 등록', '이슈 목록, 입장', '이슈 브라우즈', '이슈 통계 확인', '프로젝트 정보 확인', '프로젝트에 사용자 등록', '뒤로 가기',
                     '프로젝트 삭제']
-                : ['이슈 등록', '이슈 목록, 입장', '이슈 브라우즈' ,'이슈 통계 확인', '프로젝트 정보 확인', '프로젝트 메뉴로'],
+                : ['이슈 등록', '이슈 목록, 입장', '이슈 브라우즈' ,'이슈 통계 확인', '프로젝트 정보 확인', '뒤로 가기'],
         }
     ];
     const answerissueTrackingMenu = await inquirer.prompt(questionMenuinProject);
@@ -84,7 +84,7 @@ export async function menuinproject() {
             console.log('프로젝트에 사용자를 등록하는 페이지로 넘어갑니다');
             await assignUsertoProject();
             break;
-        case '프로젝트 메뉴로':
+        case '뒤로 가기':
             console.log('프로젝트 메뉴로 돌아갑니다.');
             await projectpage();
             break;
