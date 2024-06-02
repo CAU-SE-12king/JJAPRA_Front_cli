@@ -15,7 +15,7 @@ export async function changeissuestate() {
 
     const token = localStorage.getItem('TOKEN');
     const userRole = localStorage.getItem('role');
-    const username = localStorage.getItem('username');
+    const userid = localStorage.getItem('userid');
     const url = `https://jjapra.r-e.kr/issues/${issueId}`;
 
     // 이슈의 현재 상태와 assignee 정보를 가져옴
@@ -62,11 +62,11 @@ export async function changeissuestate() {
 
     let value;
     if (field === 'status') {
-        const haveAuthorityOrNot = (currentStatus === 'ASSIGNED' && currentAssignee === username)||
+        const haveAuthorityOrNot = (currentStatus === 'ASSIGNED' && currentAssignee === userid)||
         (userRole === 'TESTER' && currentStatus === 'FIXED')|| (userRole === 'PL');
         let choices;
         if(haveAuthorityOrNot){
-            if (currentStatus === 'ASSIGNED' && currentAssignee === username) {
+            if (currentStatus === 'ASSIGNED' && currentAssignee === userid) {
                 choices = ['FIXED'];
             } 
             else if (userRole === 'TESTER' && currentStatus === 'FIXED'){
@@ -92,16 +92,23 @@ export async function changeissuestate() {
             return;
         };
     } else if (field === 'priority') {
-        const questionForPriority = [
-            {
-                type: 'list',
-                name: 'priority',
-                message: '새로운 priority 값을 선택하세요:',
-                choices: ['BLOCKER', 'CRITICAL', 'MAJOR', 'MINOR', 'TRIVIAL']
-            }
-        ];
-        const priorityAnswer = await inquirer.prompt(questionForPriority);
-        value = priorityAnswer.priority;
+        if(userRole === 'PL' || userRole === 'ADMIN'){
+            const questionForPriority = [
+                {
+                    type: 'list',
+                    name: 'priority',
+                    message: '새로운 priority 값을 선택하세요:',
+                    choices: ['BLOCKER', 'CRITICAL', 'MAJOR', 'MINOR', 'TRIVIAL']
+                }
+            ];
+            const priorityAnswer = await inquirer.prompt(questionForPriority);
+            value = priorityAnswer.priority;
+    }
+    else {
+        console.log('권한이 없습니다.');
+        await menuinissue();
+        return;
+    }
     } else {
         const questionForValue = [
             {

@@ -7,6 +7,7 @@ import { assignUsertoProject } from './assignUsertoProject.js';
 import { deleteproject } from './deleteproject.js';
 import { projectpage } from './projectpage.js';
 import { showissuestatistic } from './showissuestatistic.js';
+import { browseissue } from './browseissue.js';
 import axios from 'axios';
 const localStorage = new LocalStorage('./scratch');
 
@@ -15,7 +16,6 @@ export async function menuinproject() {
     const projectId = localStorage.getItem('currentProjectId');
     const token = localStorage.getItem('TOKEN');
     const userid = localStorage.getItem('userid');
-    console.log(userid);
     if (!projectId || !userid || !token) {
         console.log('프로젝트 ID, 사용자 이름 또는 토큰이 없습니다.');
         await menuinproject();
@@ -44,7 +44,6 @@ export async function menuinproject() {
         console.error('프로젝트 정보를 불러오는 도중 오류가 발생했습니다:', error.message);
     }
     const userRole = localStorage.getItem('role');
-    console.log('Stored role:', userRole);
 
     const isAdmin = userRole === 'ADMIN';
     const questionMenuinProject = [
@@ -53,9 +52,9 @@ export async function menuinproject() {
             name: 'issueTrackingMenu',
             message: 'What do you want to do?',
             choices: isAdmin 
-                ? ['이슈 등록', '이슈 목록, 입장', '이슈 통계 확인', '프로젝트 정보 확인', '프로젝트에 사용자 등록', '프로젝트 메뉴로',
+                ? ['이슈 등록', '이슈 목록, 입장', '이슈 브라우즈', '이슈 통계 확인', '프로젝트 정보 확인', '프로젝트에 사용자 등록', '프로젝트 메뉴로',
                     '프로젝트 삭제']
-                : ['이슈 등록', '이슈 목록, 입장', '이슈 통계 확인', '프로젝트 정보 확인', '프로젝트 메뉴로'],
+                : ['이슈 등록', '이슈 목록, 입장', '이슈 브라우즈' ,'이슈 통계 확인', '프로젝트 정보 확인', '프로젝트 메뉴로'],
         }
     ];
     const answerissueTrackingMenu = await inquirer.prompt(questionMenuinProject);
@@ -68,6 +67,10 @@ export async function menuinproject() {
         case '이슈 목록, 입장':
             console.log('이슈 리스트를 출력합니다');
             await showprojectissue();
+            break;
+        case '이슈 브라우즈':
+            console.log('이슈 브라우즈를 위한 페이지로 이동합니다.');
+            await browseissue();
             break;
         case '이슈 통계 확인':
             console.log('이슈 통계를 확인합니다');
