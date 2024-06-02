@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { LocalStorage } from 'node-localstorage';
-
+import { projectpage } from './projectpage.js';
 const localStorage = new LocalStorage('./scratch');
 
 export async function deleteproject() {
@@ -35,4 +35,5 @@ export async function deleteproject() {
             console.error('네트워크 오류가 발생했습니다:', error.message);
         }
     }
+    await projectpage();
 }
